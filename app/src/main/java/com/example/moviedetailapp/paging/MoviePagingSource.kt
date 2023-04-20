@@ -14,7 +14,7 @@ class MoviePagingSource (private val movieApiRepository :MovieApiRepository): Pa
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, MoviesListResponse.Result> {
         return try {
             val currentPage = params.key ?: 1
-            val response = movieApiRepository.getMovieList(Constants.API_KEY,"en",currentPage, "US")
+            val response = movieApiRepository.getMovieList("en",currentPage, "US")
             val data = response.body()!!.results
             val responseData = mutableListOf<MoviesListResponse.Result>()
             responseData.addAll(data)
